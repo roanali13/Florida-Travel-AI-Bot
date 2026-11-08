@@ -1,0 +1,625 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Florida Explorer | Your Florida Travel Guide</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: #234052;
+            background: #f7fbfd;
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px 7%;
+            background: white;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+            color: #0077b6;
+        }
+
+        .logo span {
+            color: #00a6a6;
+        }
+
+        .nav-links a {
+            margin-left: 25px;
+            text-decoration: none;
+            color: #234052;
+            font-weight: bold;
+        }
+
+        .nav-links a:hover {
+            color: #0096c7;
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 570px;
+            background:
+                linear-gradient(
+                    rgba(0,48,80,0.35),
+                    rgba(0,48,80,0.55)
+                ),
+                url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1800&q=85");
+
+            background-position: center;
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 50px 20px;
+            color: white;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .eyebrow {
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .hero h1 {
+            font-size: clamp(38px, 6vw, 68px);
+            line-height: 1.12;
+            margin: 15px 0;
+        }
+
+        .hero p {
+            font-size: 19px;
+            max-width: 610px;
+            margin: 0 auto 25px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #ffbf47;
+            color: #173b4f;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 14px 28px;
+            border-radius: 30px;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #ffd477;
+            transform: translateY(-3px);
+        }
+
+        /* General Sections */
+        section {
+            padding: 75px 7%;
+        }
+
+        .section-heading {
+            text-align: center;
+            max-width: 720px;
+            margin: 0 auto 38px;
+        }
+
+        .section-heading h2 {
+            font-size: 36px;
+            color: #006b9f;
+            margin: 10px 0;
+        }
+
+        .section-heading p {
+            color: #607584;
+        }
+
+        .tag {
+            color: #00a6a6;
+            font-size: 13px;
+            letter-spacing: 2px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        /* About */
+        .about {
+            text-align: center;
+            background: white;
+        }
+
+        .about p {
+            max-width: 760px;
+            margin: auto;
+            font-size: 17px;
+        }
+
+        /* Destinations */
+        .destination-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 22px;
+        }
+
+        .destination-card {
+            background: white;
+            overflow: hidden;
+            border-radius: 17px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: 0.3s;
+        }
+
+        .destination-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.13);
+        }
+
+        .destination-card img {
+            width: 100%;
+            height: 210px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .destination-info {
+            padding: 20px;
+        }
+
+        .destination-info h3 {
+            color: #0077b6;
+            font-size: 23px;
+            margin: 0 0 8px;
+        }
+
+        .destination-info p {
+            font-size: 14px;
+            color: #5e7381;
+            margin: 0;
+        }
+
+        /* Travel Experiences */
+        .experiences {
+            background: #eaf7fb;
+        }
+
+        .experience-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .experience-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px 18px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+        }
+
+        .experience-icon {
+            font-size: 44px;
+            margin-bottom: 12px;
+        }
+
+        .experience-card h3 {
+            color: #0077b6;
+        }
+
+        /* AI Introduction */
+        .ai-intro {
+            background: #0077b6;
+            color: white;
+            text-align: center;
+        }
+
+        .ai-intro h2 {
+            font-size: 38px;
+            margin: 10px 0;
+        }
+
+        .ai-intro p {
+            max-width: 700px;
+            margin: 0 auto 25px;
+        }
+
+        /* Chatbot */
+        .chat-section {
+            background: #f7fbfd;
+        }
+
+        .chat-box {
+            max-width: 900px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.09);
+        }
+
+        .chat-heading {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .chat-heading h3 {
+            color: #0077b6;
+            font-size: 25px;
+        }
+
+        .suggestions {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0 25px;
+        }
+
+        .suggestion {
+            background: #eaf7fb;
+            color: #006b9f;
+            border-radius: 25px;
+            padding: 9px 16px;
+            font-size: 13px;
+        }
+
+        #edge-chat {
+            width: 100%;
+            height: 600px;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #f5fafd;
+        }
+
+        /* Footer */
+        footer {
+            background: #023e6b;
+            color: white;
+            text-align: center;
+            padding: 35px 20px;
+        }
+
+        footer h3 {
+            margin-bottom: 5px;
+        }
+
+        footer p {
+            opacity: 0.85;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1000px) {
+            .destination-grid,
+            .experience-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            nav {
+                justify-content: center;
+                text-align: center;
+            }
+
+            .nav-links a {
+                margin: 0 8px;
+                font-size: 13px;
+            }
+
+            section {
+                padding: 55px 5%;
+            }
+
+            .hero {
+                min-height: 480px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .destination-grid,
+            .experience-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-heading h2 {
+                font-size: 29px;
+            }
+
+            .chat-box {
+                padding: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">Florida <span>Explorer</span></div>
+
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#destinations">Destinations</a>
+            <a href="#experiences">Experiences</a>
+            <a href="#chat">AI Assistant</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero" id="home">
+        <div class="hero-content">
+            <div class="eyebrow">Welcome to the Sunshine State</div>
+
+            <h1>Your Florida Adventure Starts Here</h1>
+
+            <p>
+                From beautiful beaches to exciting theme parks,
+                discover everything Florida has to offer with
+                your personal AI travel assistant.
+            </p>
+
+            <a href="#chat" class="btn">Plan Your Trip ✈</a>
+        </div>
+    </div>
+
+    <!-- About -->
+    <section class="about" id="about">
+        <div class="section-heading">
+            <div class="tag">Discover Florida</div>
+            <h2>Explore More. Plan Less.</h2>
+        </div>
+
+        <p>
+            Welcome to Florida Explorer! We're making it
+            easier to plan your next Florida vacation.
+            Whether you're looking for a relaxing beach
+            getaway, a family adventure, or a weekend
+            exploring a new city, our AI Travel Assistant
+            can help you find destinations and activities
+            that match your interests.
+        </p>
+    </section>
+
+    <!-- Destinations -->
+    <section id="destinations">
+        <div class="section-heading">
+            <div class="tag">Where To Go</div>
+            <h2>Explore Florida's Top Destinations</h2>
+            <p>
+                From exciting cities to relaxing coastal
+                getaways, there's something for everyone.
+            </p>
+        </div>
+
+        <div class="destination-grid">
+
+            <div class="destination-card">
+                <img
+                    src="https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?auto=format&fit=crop&w=800&q=80"
+                    alt="Sunny beach getaway"
+                    loading="lazy">
+
+                <div class="destination-info">
+                    <h3>Orlando</h3>
+                    <p>
+                        Discover world-famous theme parks,
+                        family attractions, shopping,
+                        and entertainment.
+                    </p>
+                </div>
+            </div>
+
+            <div class="destination-card">
+                <img
+                    src="https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=800&q=80"
+                    alt="Tropical beach with blue ocean"
+                    loading="lazy">
+
+                <div class="destination-info">
+                    <h3>Miami</h3>
+                    <p>
+                        Experience beautiful beaches,
+                        vibrant culture, nightlife,
+                        and incredible restaurants.
+                    </p>
+                </div>
+            </div>
+
+            <div class="destination-card">
+                <img
+                    src="https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=800&q=80"
+                    alt="Ocean waves along a tropical coast"
+                    loading="lazy">
+
+                <div class="destination-info">
+                    <h3>Florida Keys</h3>
+                    <p>
+                        Enjoy island adventures,
+                        snorkeling, boating,
+                        and relaxing tropical views.
+                    </p>
+                </div>
+            </div>
+
+            <div class="destination-card">
+                <img
+                    src="https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=800&q=80"
+                    alt="Scenic outdoor landscape"
+                    loading="lazy">
+
+                <div class="destination-info">
+                    <h3>Tampa Bay</h3>
+                    <p>
+                        Explore waterfront attractions,
+                        exciting activities, restaurants,
+                        and nearby beaches.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Travel Experiences -->
+    <section class="experiences" id="experiences">
+        <div class="section-heading">
+            <div class="tag">Find Your Adventure</div>
+            <h2>What Kind of Trip Are You Planning?</h2>
+            <p>
+                Whatever your interests are,
+                Florida has something for you!
+            </p>
+        </div>
+
+        <div class="experience-grid">
+
+            <div class="experience-card">
+                <div class="experience-icon">🏖️</div>
+                <h3>Beach Getaways</h3>
+                <p>
+                    Relax on sandy beaches and
+                    enjoy beautiful ocean views.
+                </p>
+            </div>
+
+            <div class="experience-card">
+                <div class="experience-icon">🎢</div>
+                <h3>Theme Parks</h3>
+                <p>
+                    Experience thrilling rides
+                    and family-friendly fun.
+                </p>
+            </div>
+
+            <div class="experience-card">
+                <div class="experience-icon">🌴</div>
+                <h3>Outdoor Adventures</h3>
+                <p>
+                    Explore nature, kayaking,
+                    snorkeling, and wildlife.
+                </p>
+            </div>
+
+            <div class="experience-card">
+                <div class="experience-icon">🏙️</div>
+                <h3>City Experiences</h3>
+                <p>
+                    Discover restaurants, shopping,
+                    museums, and nightlife.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- AI Assistant Introduction -->
+    <section class="ai-intro">
+        <div class="tag" style="color:#b7eff6;">
+            Meet Your Travel Assistant
+        </div>
+
+        <h2>Let AI Plan Your Next Adventure</h2>
+
+        <p>
+            Not sure where to start? Our AI Travel Assistant
+            can recommend destinations, answer travel questions,
+            and help create personalized Florida itineraries.
+        </p>
+
+        <a href="#chat" class="btn">Chat With Our Assistant</a>
+    </section>
+
+    <!-- Botpress Chatbot -->
+    <section class="chat-section" id="chat">
+        <div class="section-heading">
+            <div class="tag">Let's Get Started</div>
+            <h2>Your Personal Florida Travel Assistant</h2>
+            <p>
+                Tell us what you're looking for and let
+                our AI assistant help you plan your trip!
+            </p>
+        </div>
+
+        <div class="chat-box">
+
+            <div class="chat-heading">
+                <h3>Ask Me Anything About Florida!</h3>
+                <p>Not sure what to ask? Try one of these:</p>
+            </div>
+
+            <div class="suggestions">
+                <span class="suggestion">
+                    Best beaches in Florida?
+                </span>
+
+                <span class="suggestion">
+                    Plan a 3-day Orlando trip
+                </span>
+
+                <span class="suggestion">
+                    Family activities in Miami
+                </span>
+            </div>
+
+            <!-- Actual Botpress AI Chatbot -->
+            <div id="edge-chat" style="height: 600px"></div>
+
+            <link rel="stylesheet"
+                href="https://vdk-viber-runtime-prod.bot.botpress.host/edge/webchat.css" />
+
+            <script src="https://vdk-viber-runtime-prod.bot.botpress.host/edge/webchat.js"></script>
+
+            <script>
+                fetch("https://vdk-viber-runtime-prod.bot.botpress.host/edge/bots/48d887c7-49a6-46b9-b9b3-9bdcaa0fbdac/config")
+                    .then((res) => res.json())
+                    .then(({ webchat }) =>
+                        VdkEdgeWebchat.mount({
+                            ...webchat,
+                            mode: "embed",
+                            baseUrl: "https://vdk-viber-runtime-prod.bot.botpress.host",
+                            botId: "48d887c7-49a6-46b9-b9b3-9bdcaa0fbdac",
+                            target: document.getElementById("edge-chat")
+                        })
+                    )
+                    .catch((error) => {
+                        console.error("Chatbot loading error:", error);
+                    });
+            </script>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <h3>Florida Explorer</h3>
+        <p>Your AI-Powered Florida Travel Guide</p>
+        <p>Discover. Explore. Experience Florida.</p>
+    </footer>
+
+</body>
+</html>
